@@ -1,0 +1,3 @@
+package idv.chauyan.doordashlite.presentation
+
+interface BasePresenter
