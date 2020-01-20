@@ -5,6 +5,9 @@ import idv.chauyan.doordashlite.presentation.model.PresentationRestaurant
 import idv.chauyan.doordashlite.presentation.model.exts.toPresentationModel
 import idv.chauyan.doordashlite.presentation.screen.restaurant_list.RestaurantListContract
 
+/**
+ * Mock restaurant list model implementation
+ */
 class MockRestaurantListModel(
   private val getRestaurantList: GetRestaurantList
 ) : RestaurantListContract.Model {

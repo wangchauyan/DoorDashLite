@@ -3,6 +3,9 @@ package idv.chauyan.doordashlite.presentation.screen.restaurant_list.presenter
 import idv.chauyan.doordashlite.presentation.screen.restaurant_list.RestaurantListContract
 import kotlinx.coroutines.runBlocking
 
+/**
+ * Mock restaurant list presenter implementation
+ */
 class MockRestaurantListPresenter(
   private val restaurantListModel: RestaurantListContract.Model,
   private val restaurantListView: RestaurantListContract.View
