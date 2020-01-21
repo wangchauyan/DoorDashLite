@@ -11,12 +11,17 @@ import idv.chauyan.doordashlite.R
 import idv.chauyan.doordashlite.presentation.model.PresentationRestaurant
 import idv.chauyan.doordashlite.presentation.screen.restaurant_list.RestaurantListContract
 
-import kotlinx.android.synthetic.main.fragment_restaurantlist.view.*
+import kotlinx.android.synthetic.main.fragment_restaurant_item.view.*
 
 class RestaurantListAdapter(
   private var restaurants: List<PresentationRestaurant>,
   private val listener: RestaurantListContract.View.RestaurantListBehavior?
 ) : RecyclerView.Adapter<RestaurantListAdapter.ViewHolder>() {
+
+  enum class ItemType {
+    TYPE_RESTAURANT,
+    TYPE_LOADING
+  }
 
   private val restaurantOnClickListener: View.OnClickListener
 
@@ -29,7 +34,7 @@ class RestaurantListAdapter(
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     val view = LayoutInflater.from(parent.context)
-      .inflate(R.layout.fragment_restaurantlist, parent, false)
+      .inflate(R.layout.fragment_restaurant_item, parent, false)
     return ViewHolder(view)
   }
 
