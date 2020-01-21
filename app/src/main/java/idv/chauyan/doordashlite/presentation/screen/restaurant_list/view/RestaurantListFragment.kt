@@ -2,6 +2,7 @@ package idv.chauyan.doordashlite.presentation.screen.restaurant_list.view
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ open class RestaurantListFragment : Fragment(), RestaurantListContract.View {
 
   // customize the recyclerview layout
   private var columnCount = 1
+  private var refreshing = false
   private var loadMore = false
   private val pageSize = 10
   private var since = 0
@@ -35,7 +37,14 @@ open class RestaurantListFragment : Fragment(), RestaurantListContract.View {
   }
 
   override fun updateRestaurants(data: List<PresentationRestaurant>) {
-    restaurantListAdapter.updateRestaurants(data)
+
+    if (loadMore) {
+      loadMore = false
+      restaurantListAdapter.dismissLoading()
+    }
+
+    restaurantListAdapter.updateRestaurants(data, refreshing)
+    refreshing = false
   }
 
   override fun onCreateView(
@@ -47,14 +56,39 @@ open class RestaurantListFragment : Fragment(), RestaurantListContract.View {
 
     restaurantList = view.findViewById(R.id.list)
     restaurantRefresher = view.findViewById(R.id.refresher)
+    restaurantListAdapter = RestaurantListAdapter(arrayListOf(), listener)
 
     restaurantList.apply {
-      restaurantListAdapter = RestaurantListAdapter(arrayListOf(), listener)
       layoutManager = when {
         columnCount <= 1 -> LinearLayoutManager(activity)
         else -> GridLayoutManager(activity, columnCount)
       }
+
+      // setup adapter
       adapter = restaurantListAdapter
+
+      // get the scroll position changed event
+      addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+          super.onScrolled(recyclerView, dx, dy)
+
+          // just ignore the GridLayoutManager case here
+          val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+          val totalItems = layoutManager.itemCount
+          val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
+
+          if (!loadMore && totalItems >= pageSize && totalItems <= lastVisibleItem + 1) {
+            loadMore = true
+
+            Handler().post {
+              restaurantListAdapter.showLoading()
+            }
+            Handler().postDelayed({
+              getRestaurantList(false)
+            }, 500)
+          }
+        }
+      })
     }
 
     restaurantRefresher.apply {
@@ -80,7 +114,6 @@ open class RestaurantListFragment : Fragment(), RestaurantListContract.View {
 
   override fun onResume() {
     super.onResume()
-
     getRestaurantList(false)
   }
 
@@ -89,9 +122,14 @@ open class RestaurantListFragment : Fragment(), RestaurantListContract.View {
    */
   fun getRestaurantList(refreshing: Boolean) {
     // update refresher
-    if (refreshing) {
+    this.refreshing = refreshing
+    if (this.refreshing) {
       restaurantRefresher.isRefreshing = false
       since = 0
+    }
+
+    if (loadMore) {
+      since += pageSize
     }
 
     // get restaurant list

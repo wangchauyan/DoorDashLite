@@ -5,5 +5,6 @@ data class PresentationRestaurant(
   val name: String,
   val description: String,
   val coverImage: String,
-  val status: String
+  val status: String,
+  val isLoading: Boolean = false
 )
