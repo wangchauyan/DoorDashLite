@@ -52,8 +52,7 @@ class RestaurantListAdapter(
   override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
     if (holder is RestaurantItem) {
       val item = restaurants[position]
-      Picasso
-        .with(holder.restaurantLogo.context)
+      Picasso.get()
         .load(item.coverImage)
         .into(holder.restaurantLogo)
       holder.restaurantName.text = item.name
