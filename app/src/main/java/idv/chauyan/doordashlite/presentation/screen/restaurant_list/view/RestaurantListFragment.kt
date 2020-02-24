@@ -32,6 +32,10 @@ open class RestaurantListFragment : Fragment(), RestaurantListContract.View {
   private lateinit var restaurantList: RecyclerView
   private lateinit var restaurantRefresher: SwipeRefreshLayout
 
+  /**
+   * Restaurant list contract
+   */
+
   override fun setPresenter(presenter: RestaurantListContract.Presenter) {
     this.presenter = presenter
   }
@@ -46,6 +50,10 @@ open class RestaurantListFragment : Fragment(), RestaurantListContract.View {
     restaurantListAdapter.updateRestaurants(data, refreshing)
     refreshing = false
   }
+
+  /**
+   * Fragment interface
+   */
 
   override fun onCreateView(
     inflater: LayoutInflater,
