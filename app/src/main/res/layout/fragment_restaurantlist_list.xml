@@ -7,10 +7,10 @@
   android:layout_height="match_parent">
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/list"
-    android:name="idv.chauyan.doordashlite.presentation.screen.restaurantlist.view.RestaurantListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="5dp"
+    android:name="idv.chauyan.doordashlite.presentation.screen.restaurantlist.view.RestaurantListFragment"
     app:layoutManager="LinearLayoutManager"
     tools:context=".presentation.screen.restaurant_list.view.RestaurantListFragment"
     tools:listitem="@layout/fragment_restaurant_item" />
