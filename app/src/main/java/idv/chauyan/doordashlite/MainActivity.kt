@@ -6,6 +6,7 @@ import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import com.mapbox.mapboxsdk.Mapbox
 import idv.chauyan.doordashlite.domain.DomainRepository
 import idv.chauyan.doordashlite.domain.usecase.GetRestaurantList
 import idv.chauyan.doordashlite.presentation.model.PresentationRestaurant
@@ -23,6 +24,10 @@ class MainActivity :
   @SuppressLint("ResourceAsColor")
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    Mapbox.getInstance(
+      this,
+      ""
+    )
     setContentView(R.layout.activity_main)
 
     fragmentContainer.apply {
