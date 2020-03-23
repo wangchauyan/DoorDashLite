@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.mapbox.mapboxsdk.maps.MapView
-import com.mapbox.mapboxsdk.maps.MapboxMap
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 import com.mapbox.mapboxsdk.maps.Style
 import idv.chauyan.doordashlite.R
 import idv.chauyan.doordashlite.presentation.screen.restaurant_detail.RestaurantDetailContract
@@ -35,13 +33,8 @@ class RestaurantDetailFragment : Fragment(), RestaurantDetailContract.View {
   ): View? {
     // Inflate the layout for this fragment
     val view = inflater.inflate(R.layout.fragment_restaurant_detail, container, false)
-    mapView = view.findViewById(R.id.mapView)
-    mapView.apply {
-      onCreate(savedInstanceState)
-      getMapAsync { mapBoxMap ->
-        mapBoxMap.setStyle(Style.MAPBOX_STREETS)
-      }
-    }
+
+    initMaps(view, savedInstanceState)
 
     return view
   }
@@ -79,5 +72,20 @@ class RestaurantDetailFragment : Fragment(), RestaurantDetailContract.View {
   override fun onSaveInstanceState(outState: Bundle) {
     super.onSaveInstanceState(outState)
     mapView.onSaveInstanceState(outState)
+  }
+
+  // private methods
+
+  private fun initMaps(
+    rootView: View,
+    savedInstanceState: Bundle?
+  ) {
+    mapView = rootView.findViewById(R.id.mapView)
+    mapView.apply {
+      onCreate(savedInstanceState)
+      getMapAsync { mapBoxMap ->
+        mapBoxMap.setStyle(Style.MAPBOX_STREETS)
+      }
+    }
   }
 }

@@ -26,7 +26,7 @@ class MainActivity :
     super.onCreate(savedInstanceState)
     Mapbox.getInstance(
       this,
-      ""
+      "pk.eyJ1IjoiY2hhdXlhbiIsImEiOiJjano3MWc3NmUwMWt6M21vNzZwaG1xbXVwIn0.BP1AUvP1mhX9mhiqIGN2uw"
     )
     setContentView(R.layout.activity_main)
 
