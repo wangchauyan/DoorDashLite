@@ -11,9 +11,6 @@ import com.mapbox.mapboxsdk.maps.Style
 import idv.chauyan.doordashlite.R
 import idv.chauyan.doordashlite.presentation.screen.restaurant_detail.RestaurantDetailContract
 
-/**
- * A simple [Fragment] subclass.
- */
 class RestaurantDetailFragment : Fragment(), RestaurantDetailContract.View {
 
   private lateinit var presenter: RestaurantDetailContract.Presenter

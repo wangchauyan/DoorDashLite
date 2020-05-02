@@ -3,7 +3,6 @@ package idv.chauyan.doordashlite
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.mapbox.mapboxsdk.Mapbox
