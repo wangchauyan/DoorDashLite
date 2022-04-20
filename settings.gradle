@@ -14,11 +14,11 @@ dependencyResolutionManagement {
                 // This should always be `mapbox` (not your username).
                 username = "mapbox"
                 // Use the secret token you stored in gradle.properties as the password
-                password = "sk.eyJ1IjoiY2hhdXlhbiIsImEiOiJjbDI3NWNwYnAwNWtpM2NyMHE4ZXA2Z2hjIn0.lTD9krIv9cdvBn56Ps-Vrg"
+                password = ""
             }
         }
     }
 }
 
 include ':app'
-rootProject.name='DoorDashLite'
+rootProject.name = 'DoorDashLite'
