@@ -12,9 +12,6 @@ import idv.chauyan.doordashlite.R
 import idv.chauyan.doordashlite.presentation.model.PresentationRestaurant
 import idv.chauyan.doordashlite.presentation.screen.restaurant_list.RestaurantListContract
 
-import kotlinx.android.synthetic.main.fragment_restaurant_item.view.*
-import kotlinx.android.synthetic.main.fragment_restaurant_loading.view.*
-
 class RestaurantListAdapter(
   private var restaurants: ArrayList<PresentationRestaurant>,
   private val listener: RestaurantListContract.View.RestaurantListBehavior?
@@ -101,13 +98,13 @@ class RestaurantListAdapter(
   }
 
   inner class RestaurantItem(val view: View) : RecyclerView.ViewHolder(view) {
-    val restaurantLogo: ImageView = view.restaurantLogo
-    val restaurantName: TextView = view.restaurantName
-    val restaurantCategory: TextView = view.restaurantCategory
-    val restaurantStatus: TextView = view.restaurantStatus
+    val restaurantLogo: ImageView = view.findViewById(R.id.restaurantLogo)
+    val restaurantName: TextView = view.findViewById(R.id.restaurantName)
+    val restaurantCategory: TextView = view.findViewById(R.id.restaurantCategory)
+    val restaurantStatus: TextView = view.findViewById(R.id.restaurantStatus)
   }
 
   inner class RestaurantLoading(val view: View) : RecyclerView.ViewHolder(view) {
-    val restaurantLoading: ProgressBar = view.restaurantLoading
+    val restaurantLoading: ProgressBar = view.findViewById(R.id.restaurantLoading)
   }
 }

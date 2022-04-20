@@ -10,8 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import idv.chauyan.doordashlite.R
-import kotlinx.android.synthetic.main.fragment_actions_list_dialog.*
-import kotlinx.android.synthetic.main.fragment_actions_list_dialog_item.view.*
+import idv.chauyan.doordashlite.databinding.FragmentActionsListDialogBinding
+import idv.chauyan.doordashlite.databinding.FragmentActionsListDialogItemBinding
 
 // TODO: Customize parameter argument names
 const val ARG_ITEM_COUNT = "item_count"
@@ -30,17 +30,19 @@ const val ARG_ITEM_COUNT = "item_count"
 class CommandActions : BottomSheetDialogFragment() {
 
   private var mListener: Listener? = null
+  private lateinit var itemViewBinding: FragmentActionsListDialogBinding
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    return inflater.inflate(R.layout.fragment_actions_list_dialog, container, false)
+    itemViewBinding = FragmentActionsListDialogBinding.inflate(layoutInflater)
+    return itemViewBinding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    list.layoutManager = LinearLayoutManager(context)
-    list.adapter = arguments?.getInt(ARG_ITEM_COUNT)?.let { ActionsAdapter(it) }
+    itemViewBinding.list.layoutManager = LinearLayoutManager(context)
+    itemViewBinding.list.adapter = arguments?.getInt(ARG_ITEM_COUNT)?.let { ActionsAdapter(it) }
   }
 
   override fun onAttach(context: Context) {
@@ -73,7 +75,7 @@ class CommandActions : BottomSheetDialogFragment() {
     )
   ) {
 
-    internal val text: TextView = itemView.text
+    val text: TextView = itemView.findViewById(R.id.text)
 
     init {
       text.setOnClickListener {
